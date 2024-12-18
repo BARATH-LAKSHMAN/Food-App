@@ -30,13 +30,11 @@ const ProductsTabScreen = () => {
         showsVerticalScrollIndicator={false}
         className="bg-primary flex-1 mb-4"
       >
-        <ProductDisplay />
-        <ProductDisplay />
-        <ProductDisplay />
-        <ProductDisplay />
-        <ProductDisplay />
-        <ProductDisplay />
-        <ProductDisplay />
+        <ProductDisplay name="ghee" img={require("../assets/foodDisplay/ghee.jpg") }/>
+        <ProductDisplay name="paneer" img={require("../assets/foodDisplay/paneer.jpg")} />
+        <ProductDisplay name="batter" img={require("../assets/foodDisplay/batter.jpg")} />
+        <ProductDisplay name="kesari" img={require("../assets/foodDisplay/kesari.jpg" )}/>
+        <ProductDisplay name="pickle" img={require("../assets/foodDisplay/pickle.webp")} />
       </ScrollView>
       <Basket />
     </View>

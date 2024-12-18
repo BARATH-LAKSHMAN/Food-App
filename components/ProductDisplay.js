@@ -1,13 +1,13 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-const ProductDisplay = () => {
+const ProductDisplay = (props) => {
   return (
     <View className="mt-2 mx-4 flex-row items-center justify-between border-b-2 border-b-veg pb-3">
-      <Image source={require("../assets/foodDisplay/idly.jpg")}
+      <Image source={props.img}
         className="w-20 h-20 rounded mt-1" />
          <View className="">
-        <Text className="text-xl font-bold">Product Name</Text>
+        <Text className="text-xl font-bold">{props.name}</Text>
         <Text className="text-center">110 Rs</Text>
        </View>
         <View className="flex-row">

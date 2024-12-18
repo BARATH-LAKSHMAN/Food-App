@@ -14,7 +14,7 @@ const Tab = createMaterialTopTabNavigator();
 const OrderNowTabScreen = () => {
   return (
     <View className="flex-1 bg-primary">
-      <SearchBar placeholder="Search food..."/>
+      <SearchBar placeholder="Search food..." />
       <View>
         <TopSection />
       </View>
@@ -25,9 +25,9 @@ const OrderNowTabScreen = () => {
             borderRadius: 10,
             elevation: 0,
           },
-          tabBarActiveTintColor: "green",
+          tabBarActiveTintColor: "#FF7400",
           tabBarInactiveTintColor: "gray",
-          tabBarIndicatorStyle: { backgroundColor: "green" },
+          tabBarIndicatorStyle: { backgroundColor: "#FF7400" },
           tabBarPressColor: "transparent",
           tabBarPressOpacity: 0,
           tabBarLabelStyle: { fontWeight: 900 },

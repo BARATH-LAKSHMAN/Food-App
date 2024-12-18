@@ -7,7 +7,7 @@ const AccountDisplay = () => {
     <TouchableOpacity className="">
       <View className="p-3 mx-4 border-b-2 border-veg flex-row">
         <UserIcon size={20} color="gray" />
-        <Text className="font-semibold ml-5 text-gray">AccountDisplay</Text>
+        <Text className="font-semibold ml-5">AccountDisplay</Text>
       </View>
     </TouchableOpacity>
   );

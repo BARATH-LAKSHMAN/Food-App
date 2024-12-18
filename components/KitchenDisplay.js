@@ -8,7 +8,7 @@ const KitchenDisplay = (props) => {
   return (
     <View className="bg-veg h-32 mx-4 mt-4 mb-1 rounded-lg shadow-md shadow-maroon">
       <TouchableOpacity onPress={() =>{props.prebook
-        ? Navigation.navigate("PrebookKitchenDetails")
+        ? Navigation.navigate("PrebookKitchenDetails",{name:props.name})
         : Navigation.navigate("KitchenDetails");}}>
         <View className="overflow-hidden flex-row">
           <Image
@@ -18,7 +18,7 @@ const KitchenDisplay = (props) => {
 
           <View className="ml-2">
             <Text className="font-bold text-xl border-b-2 border-dashed border-primary w-60 p-1">
-              Kitchen Name
+              {props.name}
             </Text>
             <View className="flex-row justify-between p-3">
               <View>

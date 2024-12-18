@@ -9,14 +9,14 @@ const SearchBar = (props) => {
     <View className="mx-4 flex-row mt-4 bg-primary rounded-xl p-3 shadow-lg shadow-maroon">
       <MagnifyingGlassIcon
         size={30}
-        color="#C6EBC5"
+        color="#FF7400"
         strokeWidth={1}
-        stroke="#C6EBC5"
+        stroke="#FF7400"
       />
       <TextInput
         placeholder={props.placeholder}
         className="ml-2 font-semibold text-lg flex-1"
-        placeholderTextColor="#C6EBC5"
+        placeholderTextColor="#FF7400"
       />
     </View>
   );

@@ -13,7 +13,7 @@ const TopSection = () => {
       contentContainerStyle={{ paddingLeft: 15 }}
       showsHorizontalScrollIndicator={false}
     >
-      <View className="flex-row h-12 mr-4 items-center p-2 w-36 border-2 border-secondary rounded-full">
+      <View className="flex-row h-12 mr-4 items-center p-2 w-36 border-2 border-orange rounded-full">
         <Switch
           trackColor={{ false: "#C70039", true: "#C6EBC5" }}
           thumbColor={isEnabled ? "#A1C398" : "#FA7070"}
@@ -24,17 +24,17 @@ const TopSection = () => {
         <Text className="font-medium text-center">Veg Only</Text>
       </View>
       <TouchableOpacity onPress={()=>{Navigation.navigate("Kitchen")}}>
-        <Text className="font-medium mr-4 text-center items-center p-2.5 w-36 border-2 border-secondary rounded-full">
+        <Text className="font-medium mr-4 text-center items-center p-2.5 w-36 border-2 border-orange rounded-full">
           Kitchens
         </Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={()=>{Navigation.navigate("Products")}} className="">
-        <Text className="font-medium mr-4 text-center items-center p-2.5 w-36 border-2 border-secondary rounded-full">
+        <Text className="font-medium mr-4 text-center items-center p-2.5 w-36 border-2 border-orange rounded-full">
           Products
         </Text>
       </TouchableOpacity>
       <TouchableOpacity className="">
-        <Text className="mr-4 font-medium text-center items-center p-2.5 w-36 border-2 border-secondary rounded-full">
+        <Text className="mr-4 font-medium text-center items-center p-2.5 w-36 border-2 border-orange rounded-full">
           Subscriptions
         </Text>
       </TouchableOpacity>

@@ -2,12 +2,12 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { StarIcon } from "react-native-heroicons/solid";
 
-const KitchenFoodDisplay = () => {
+const KitchenFoodDisplay = (props) => {
   return (
     <View className="bg-veg h-32 mx-4 mt-4 mb-1 rounded-lg overflow-hidden flex-row shadow-md shadow-maroon">
       <View>
         <Image
-          source={require("../assets/foodDisplay/idly.jpg")}
+          source={props.img}
           className="w-28 h-32"
         />
         <View className="absolute flex-row bottom-0 items-center justify-center bg-[#fffbdc9e] w-full p-1">
@@ -26,12 +26,12 @@ const KitchenFoodDisplay = () => {
       </View>
       <View className="ml-2">
         <Text className="font-bold text-xl border-b-2 border-dashed border-primary w-60 p-1">
-          Kitchen Name
+          {props.kname}
         </Text>
         <View className="flex-row justify-between p-2">
           <View>
             <Text>
-              Idly <Text className="text-primary">x2</Text>
+              {props.name} <Text className="text-primary">x2</Text>
             </Text>
             <Text>
               Chutney <Text className="text-primary">x1</Text>

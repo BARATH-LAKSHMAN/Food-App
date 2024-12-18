@@ -21,12 +21,12 @@ const Kitchen = () => {
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <KitchenDisplay />
-        <KitchenDisplay />
-        <KitchenDisplay />
-        <KitchenDisplay />
-        <KitchenDisplay />
-        <KitchenDisplay />
+        <KitchenDisplay name="A's kitchen" />
+        <KitchenDisplay name="B's kitchen" />
+        <KitchenDisplay name="C's kitchen" />
+        <KitchenDisplay name="D's kitchen" />
+        <KitchenDisplay name="E's kitchen" />
+        <KitchenDisplay name="F's kitchen" />
       </ScrollView>
       <Basket />
     </View>

@@ -34,7 +34,9 @@ const PrebookTabScreen = () => {
         </View>
         <View className="w-28 justify-center items-center">
           <TouchableOpacity onPress={handlePress}>
-            <Text className="mt-3 font-semibold text-center">{date == "" ? "Click to Select Date" : date}</Text>
+            <Text className="mt-3 font-semibold text-center">
+              {date == "" ? "Click to Select Date" : date}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -64,14 +66,14 @@ const PrebookTabScreen = () => {
         </View>
       </Modal>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <KitchenDisplay prebook={true} />
-        <KitchenDisplay prebook={true} />
-        <KitchenDisplay prebook={true} />
-        <KitchenDisplay prebook={true} />
-        <KitchenDisplay prebook={true} />
-        <KitchenDisplay prebook={true} />
-        <KitchenDisplay prebook={true} />
-        <KitchenDisplay prebook={true} />
+        <KitchenDisplay prebook={true} name="A's kitchen" />
+        <KitchenDisplay prebook={true} name="B's kitchen" />
+        <KitchenDisplay prebook={true} name="C's kitchen" />
+        <KitchenDisplay prebook={true} name="D's kitchen" />
+        <KitchenDisplay prebook={true} name="E's kitchen" />
+        <KitchenDisplay prebook={true} name="F's kitchen" />
+        <KitchenDisplay prebook={true} name="G's kitchen" />
+        <KitchenDisplay prebook={true} name="H's kitchen" />
       </ScrollView>
     </View>
   );

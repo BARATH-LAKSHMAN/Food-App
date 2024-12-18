@@ -7,7 +7,7 @@ import KitchenFoodDisplay from "../components/KitchenFoodDisplay";
 import PrebookFoodDisplay from "../components/PrebookFoodDisplay";
 import Basket from "../components/Basket";
 
-const PrebookKitchen = () => {
+const PrebookKitchen = ({route}) => {
   const insets = useSafeAreaInsets();
   return (
     <View className="flex-1">
@@ -16,13 +16,15 @@ const PrebookKitchen = () => {
         className="w-full h-80"
       />
       <View
-        className="absolute left-[31%] bg-black opacity-50 rounded-lg"
+        className="absolute left-[36.5%] bg-black opacity-50 rounded-lg"
         style={{
           marginTop: insets.top,
           paddingBottom: insets.bottom,
         }}
       >
-        <Text className="text-xl text-center font-bold p-2">Kitchen Name</Text>
+        <Text className="text-xl text-center font-bold p-2">
+          {route.params.name}
+        </Text>
       </View>
       <Text
         className="absolute text-xl text-center w-full font-bold text-primary pt-2"
@@ -31,7 +33,7 @@ const PrebookKitchen = () => {
           paddingBottom: insets.bottom,
         }}
       >
-        Kitchen Name
+        {route.params.name}
       </Text>
       <View className="bg-primary flex-1">
         <View className="flex-row justify-between p-3 bg-nonveg">
@@ -53,13 +55,30 @@ const PrebookKitchen = () => {
             Select dishes
           </Text>
           <ScrollView showsVerticalScrollIndicator={false} className="mb-24">
-            <PrebookFoodDisplay />
-            <PrebookFoodDisplay />
-            <PrebookFoodDisplay />
-            <PrebookFoodDisplay />
-            <PrebookFoodDisplay />
-            <PrebookFoodDisplay />
-            <PrebookFoodDisplay />
+            <PrebookFoodDisplay
+              name="Idly"
+              img={require("../assets/foodDisplay/idly.jpg")}
+            />
+            <PrebookFoodDisplay
+              name="Dosa"
+              img={require("../assets/foodDisplay/dosa.jpg")}
+            />
+            <PrebookFoodDisplay
+              name="Pongal"
+              img={require("../assets/foodDisplay/pongal.jpg")}
+            />
+            <PrebookFoodDisplay
+              name="Chapathi"
+              img={require("../assets/foodDisplay/chapathi.jpg")}
+            />
+            <PrebookFoodDisplay
+              name="Parota"
+              img={require("../assets/foodDisplay/parota.webp")}
+            />
+            <PrebookFoodDisplay
+              name="Poori"
+              img={require("../assets/foodDisplay/poori.jpg")}
+            />
           </ScrollView>
         </View>
       </View>

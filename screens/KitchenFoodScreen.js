@@ -5,7 +5,7 @@ import SearchBar from '../components/SearchBar';
 import KitchenFoodDisplay from '../components/KitchenFoodDisplay';
 import Basket from '../components/Basket';
 
-const KitchenFoodScreen = () => {
+const KitchenFoodScreen = ({route}) => {
  const insets = useSafeAreaInsets();
  return (
    <View className="flex-1 bg-primary">
@@ -21,12 +21,31 @@ const KitchenFoodScreen = () => {
        </View>
      </View>
      <ScrollView showsVerticalScrollIndicator={false}>
-       <KitchenFoodDisplay />
-       <KitchenFoodDisplay />
-       <KitchenFoodDisplay />
-       <KitchenFoodDisplay />
-       <KitchenFoodDisplay />
-       <KitchenFoodDisplay />
+       <KitchenFoodDisplay
+         name={route.params.data.name}
+         img={route.params.data.img}
+         kname = "A's kitchen"
+       />
+       <KitchenFoodDisplay
+         name={route.params.data.name}
+         img={route.params.data.img}
+         kname = "B's kitchen"
+       />
+       <KitchenFoodDisplay
+         name={route.params.data.name}
+         img={route.params.data.img}
+         kname = "C's kitchen"
+       />
+       <KitchenFoodDisplay
+         name={route.params.data.name}
+         img={route.params.data.img}
+         kname = "D's kitchen"
+       />
+       <KitchenFoodDisplay
+         name={route.params.data.name}
+         img={route.params.data.img}
+         kname = "E's kitchen"
+       />
      </ScrollView>
      <Basket />
    </View>

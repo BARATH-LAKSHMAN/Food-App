@@ -26,20 +26,18 @@ const HomeTabScreen = () => {
           </Text>
           <View className="flex-row justify-center items-center ">
             <MapPinIcon size={30} color="#C70039" />
-            <Text className="text-xl font-semibold">
-              Porur
-            </Text>
+            <Text className="text-xl font-semibold">Porur</Text>
           </View>
         </View>
       </View>
       <Tab.Navigator
         screenOptions={{
-          tabBarStyle: { backgroundColor: "#C6EBC5", },
-          tabBarActiveTintColor: "#FEFDED",
+          tabBarStyle: { backgroundColor: "#EDEDED" },
+          tabBarActiveTintColor: "#FF7400",
           tabBarInactiveTintColor: "gray",
-          tabBarIndicatorStyle: { backgroundColor: "#FEFDED" },
+          tabBarIndicatorStyle: { backgroundColor: "#FF7400" },
           tabBarPressColor: "#C70039",
-          tabBarLabelStyle: {fontWeight:900}
+          tabBarLabelStyle: { fontWeight: 900 },
         }}
       >
         <Tab.Screen name="Order Now" component={OrderNowTabScreen} />
