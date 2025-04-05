@@ -3,7 +3,6 @@ import React from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import FABNav from "../../components/chefComponents/FABNav";
-import ChefOrderComponent from "../../components/chefComponents/ChefOrderComponent";
 import RemindersComponent from "../../components/chefComponents/RemindersComponent";
 
 const ChefRemaindersScreen = () => {

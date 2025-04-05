@@ -4,9 +4,9 @@ import React from "react";
 import TopSection from "../components/TopSection";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-import TiffinTabScreen from "./subTabScreens/BfTabScreen";
-import RiceTabScreen from "./subTabScreens/LunchTabScreen";
-import SnackTabScreen from "./subTabScreens/DinnerTabScreen";
+import BfTabScreen from "./subTabScreens/BfTabScreen";
+import LunchTabScreen from "./subTabScreens/LunchTabScreen";
+import DinnerTabScreen from "./subTabScreens/DinnerTabScreen";
 import SearchBar from "../components/SearchBar";
 
 const Tab = createMaterialTopTabNavigator();
@@ -33,9 +33,9 @@ const OrderNowTabScreen = () => {
           tabBarLabelStyle: { fontWeight: 900 },
         }}
       >
-        <Tab.Screen name="BreakFast" component={TiffinTabScreen} />
-        <Tab.Screen name="Lunch" component={RiceTabScreen} />
-        <Tab.Screen name="Dinner" component={SnackTabScreen} />
+        <Tab.Screen name="BreakFast" component={BfTabScreen} />
+        <Tab.Screen name="Lunch" component={LunchTabScreen} />
+        <Tab.Screen name="Dinner" component={DinnerTabScreen} />
       </Tab.Navigator>
     </View>
   );
