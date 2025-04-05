@@ -60,6 +60,14 @@ const FABNav = () => {
           style: { backgroundColor: "#EDEDED" },
           onPress: () => Navigation.navigate("ChefLandingScreen"),
         },
+        {
+          icon: "power",
+          label: "Logout",
+          color: "#FF7400",
+          labelTextColor: "#FF7400",
+          style: { backgroundColor: "#EDEDED" },
+          onPress: () => Navigation.navigate("ChefRegister"),
+        },
       ]}
       onStateChange={onStateChange}
       onPress={() => {
