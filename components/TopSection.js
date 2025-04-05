@@ -1,11 +1,18 @@
 import { View, Text, ScrollView, Switch, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import vegFilterStore from "../stores/CartStore"; 
 
 const TopSection = () => {
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+  const toggleSwitch = () => {
+    const newValue = !isEnabled;
+    setIsEnabled(newValue);
+    vegFilterStore.setVegOnly(newValue); // update MobX store
+  };
+
   const Navigation = useNavigation();
+
   return (
     <ScrollView
       className="mt-4"
@@ -23,17 +30,17 @@ const TopSection = () => {
         />
         <Text className="font-medium text-center">Veg Only</Text>
       </View>
-      <TouchableOpacity onPress={()=>{Navigation.navigate("Kitchen")}}>
+      <TouchableOpacity onPress={() => Navigation.navigate("Kitchen")}>
         <Text className="font-medium mr-4 text-center items-center p-2.5 w-36 border-2 border-orange rounded-full">
           Kitchens
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={()=>{Navigation.navigate("Products")}} className="">
+      <TouchableOpacity onPress={() => Navigation.navigate("Products")}>
         <Text className="font-medium mr-4 text-center items-center p-2.5 w-36 border-2 border-orange rounded-full">
           Products
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity className="">
+      <TouchableOpacity>
         <Text className="mr-4 font-medium text-center items-center p-2.5 w-36 border-2 border-orange rounded-full">
           Subscriptions
         </Text>
