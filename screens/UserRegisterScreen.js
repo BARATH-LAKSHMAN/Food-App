@@ -3,26 +3,25 @@ import React, { useState } from "react";
 import { useSafeAreaInsets, SafeAreaView } from "react-native-safe-area-context";
 import { Checkbox, IconButton } from "react-native-paper";
 import { TouchableOpacity } from "react-native";
-import { auth, db } from "../../firebaseConfig";
+import { auth, db } from "../firebaseConfig";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
 
-const ChefRegisterScreen = () => {
+const UserRegisterScreen = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const [isSignUp, setIsSignUp] = useState(false);
   const [checked, setChecked] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [kitchenName, setKitchenName] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [secureText, setSecureText] = useState(true);
 
   const handleAuth = async () => {
-    if (isSignUp && (!name || !phone || !kitchenName || !address || !email || !password)) {
+    if (isSignUp && (!name || !phone || !address || !email || !password)) {
       Alert.alert("Error", "All fields are required!");
       return;
     }
@@ -30,10 +29,9 @@ const ChefRegisterScreen = () => {
       if (isSignUp) {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-        await setDoc(doc(db, "kitchens", kitchenName), {
+        await setDoc(doc(db, "users", phone), {
           name,
           phone,
-          kitchenName,
           address,
           email,
           userId: user.uid,
@@ -43,13 +41,12 @@ const ChefRegisterScreen = () => {
         await signInWithEmailAndPassword(auth, email, password);
         Alert.alert("Success", "Login Successful!");
       }
-      setEmail('')
-      setPassword('')
-      setName('')
-      setPhone('')
-      setKitchenName('')
-      setAddress('')
-      navigation.navigate("ChefLandingScreen");
+      setEmail('');
+      setPassword('');
+      setName('');
+      setPhone('');
+      setAddress('');
+      navigation.navigate("LandingScreen");
     } catch (error) {
       Alert.alert("Error", error.message);
     }
@@ -57,26 +54,21 @@ const ChefRegisterScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
-      <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }} 
-      className={`bg-white flex-1 items-center ${isSignUp ? "" : "mt-20"}`}>
+      <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }} className={`bg-white flex-1 items-center ${isSignUp ? "" : "mt-20"}`}>
         <View className="border border-yellow p-10 rounded-xl m-4 mt-10 w-80">
           <Text className="font-bold text-3xl text-orange absolute -top-6 left-10 bg-white">
-            Chef {isSignUp ? "Register" : "Login"}
+            User {isSignUp ? "Register" : "Login"}
           </Text>
           <ScrollView className="flex-grow-0" showsVerticalScrollIndicator={false}>
             {isSignUp && (
               <>
                 <View className="mt-4">
-                  <Text className="text-lg ml-2">Owner Name</Text>
+                  <Text className="text-lg ml-2">Full Name</Text>
                   <TextInput placeholder="Enter your name" className="border border-orange p-2 rounded-lg" value={name} onChangeText={setName} />
                 </View>
                 <View className="mt-4">
                   <Text className="text-lg ml-2">Phone Number</Text>
                   <TextInput placeholder="Enter your phone number" className="border border-orange p-2 rounded-lg" keyboardType="phone-pad" value={phone} onChangeText={setPhone} />
-                </View>
-                <View className="mt-4">
-                  <Text className="text-lg ml-2">Kitchen Name</Text>
-                  <TextInput placeholder="Enter your kitchen name" className="border border-orange p-2 rounded-lg" value={kitchenName} onChangeText={setKitchenName} />
                 </View>
                 <View className="mt-4">
                   <Text className="text-lg ml-2">Address</Text>
@@ -118,7 +110,7 @@ const ChefRegisterScreen = () => {
           </ScrollView>
         </View>
         <Text className="mt-2 font-semibold text-lg">
-          {isSignUp ? "Already have a Kitchen? " : "Don't have a Kitchen? "}
+          {isSignUp ? "Already have an account? " : "Don't have an account? "}
           <Text className="text-orange underline" onPress={() => setIsSignUp(!isSignUp)}>
             {isSignUp ? "Login" : "Register"}
           </Text>
@@ -128,4 +120,4 @@ const ChefRegisterScreen = () => {
   );
 };
 
-export default ChefRegisterScreen;
+export default UserRegisterScreen;

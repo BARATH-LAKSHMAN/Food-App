@@ -1,19 +1,62 @@
-import { View, Text, Button, TouchableOpacity, ScrollView } from "react-native";
-import React from "react";
+import { getFirestore, collection, query, where, onSnapshot } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { View, Text, Button, TouchableOpacity, ScrollView, ActivityIndicator, Modal } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { app, auth } from "../../firebaseConfig";
 import {
   MinusIcon,
   PlusIcon,
   StarIcon,
 } from "react-native-heroicons/solid";
 import ProfileSubComponents from "../../components/chefComponents/ProfileSubComponents";
-import ChefProfileWeekSchedule from "../../components/chefComponents/ChefProfileWeekSchedule";
 import FABNav from "../../components/chefComponents/FABNav";
 
 const ChefProfileScreen = () => {
   const insets = useSafeAreaInsets();
   const Navigation = useNavigation();
+  const [ownerName, setOwnerName] = useState(null);
+  const [kitchenName, setKitchenName] = useState(null);
+  const [address, setAddress] = useState(null);
+  const [chefID, setChefID] = useState(null)
+  const [loading, setLoading] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    const fetchDetails = async () => {
+      try {
+        const user = auth.currentUser; // Get authenticated user
+        if (!user) {
+          console.error("No user is logged in");
+          return;
+        }
+
+        const db = getFirestore(app);
+        const kitchensRef = collection(db, "kitchens");
+        const q = query(kitchensRef, where("userId", "==", user.uid));
+
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+          if (!querySnapshot.empty) {
+            const kitchenData = querySnapshot.docs[0].data();
+            setOwnerName(kitchenData.name);
+            setKitchenName(kitchenData.kitchenName);
+            setAddress(kitchenData.address);
+            setChefID(kitchenData.userId)
+          } else {
+            console.log("No kitchen found for this user!");
+          }
+        });
+
+        return () => unsubscribe();
+      } catch (error) {
+        console.error("Error fetching kitchen owner:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDetails();
+  }, []);
   return (
     <View
       style={{
@@ -23,13 +66,35 @@ const ChefProfileScreen = () => {
       className="bg-white flex-1"
     >
       <View className="m-5 flex-row justify-between border-b border-gray">
-        <View className="flex-1 p-2">
-          <Text>
-            ChedID: <Text className="text-yellow">1234</Text>
-          </Text>
-          <Text className="text-xl">
-            Name: <Text className="text-yellow">ABCD</Text>
-          </Text>
+        <View className="flex-column">
+          <View className="flex-row items-center p-1">
+            <Text className="text-lg">Chef ID: </Text>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+              <Text className="text-orange rounded-xl px-2 py-1 bg-yellow text-lg">View</Text>
+            </TouchableOpacity>
+            <Modal visible={modalVisible} transparent animationType="slide">
+              <View className="flex-1 justify-center items-center bg-black/50">
+                <View className="bg-white p-5 rounded-lg border-2 border-orange">
+                  <Text className="text-lg">{chefID||"ChefID"}</Text>
+                  <TouchableOpacity
+                    className="mt-2 bg-yellow px-2 py-1 rounded-lg"
+                    onPress={() => setModalVisible(false)}
+                  >
+                    <Text className="text-orange bg-yellow text-center p-1">Close</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal>
+          </View>
+          <View>
+            <Text className="text-xl">
+              Name: {loading ? (
+                <ActivityIndicator size="small" color="#FFA500" />
+              ) : (
+                <Text className="text-yellow">{ownerName || "Owner"}</Text>
+              )}
+            </Text>
+          </View>
         </View>
         <View className="items-center p-2 border-l border-l-gray pl-10">
           <Text>
@@ -47,17 +112,24 @@ const ChefProfileScreen = () => {
 
       <ProfileSubComponents
         title="Kitchen Name:"
-        desc="WOW Kitchen"
-        button=" Edit"
+        desc={kitchenName}
+        button="Edit"
+        field="kitchenName"
       />
       <ProfileSubComponents
         title="Address:"
-        desc="Plot 4a, Nagar, Street, Porur, Chennai 600128"
-        button=" Edit"
+        desc={address}
+        button="Edit"
+        field="address"
       />
       <ProfileSubComponents
-        title="Menu:"
-        desc="All the available dishes in your kitchen"
+        title="Main Menu"
+        desc="All the dishes you can make"
+        button="View"
+      />
+      <ProfileSubComponents
+        title="Weekly Menu"
+        desc="Your weekly schedule"
         button="View"
       />
       <ProfileSubComponents
@@ -65,41 +137,14 @@ const ChefProfileScreen = () => {
         desc="View all your subscribers  "
         button="View"
       />
-      <View className="m-4">
-        <View className="flex-row justify-between items-center bg-gray p-4">
-          <TouchableOpacity>
-            <Text className="text-orange bg-yellow p-1 px-2 rounded-xl">
-              Add <PlusIcon color="#FF7400" size={12} />
-            </Text>
-          </TouchableOpacity>
-          <Text className="text-center">This Weeks Schedule</Text>
-          <TouchableOpacity>
-            <Text className="text-orange bg-yellow p-1 px-2 rounded-xl">
-              Delete <MinusIcon color="#FF7400" size={12} />
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <ScrollView
-          className="h-[25%] my-1"
-          showsVerticalScrollIndicator={false}
-        >
-          <ChefProfileWeekSchedule />
-          <ChefProfileWeekSchedule />
-          <ChefProfileWeekSchedule />
-          <ChefProfileWeekSchedule />
-          <ChefProfileWeekSchedule />
-          <ChefProfileWeekSchedule />
-          <ChefProfileWeekSchedule />
-        </ScrollView>
-      </View>
-      <ProfileSubComponents
-        title="Income:"
-        desc="123456 Rs"
-        button="View"
-      />
       <ProfileSubComponents
         title="Products:"
         desc="5"
+        button="View"
+      />
+      <ProfileSubComponents
+        title="Income:"
+        desc="123456 Rs"
         button="View"
       />
       <FABNav />

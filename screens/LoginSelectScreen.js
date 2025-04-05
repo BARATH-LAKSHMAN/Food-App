@@ -14,7 +14,7 @@ const LoginSelectScreen = () => {
       }}
       className="items-center justify-center bg-veg flex-1"
     >
-      <TouchableOpacity onPress={() => Navigation.navigate("LandingScreen")}>
+      <TouchableOpacity onPress={() => Navigation.navigate("UserRegister")}>
         <Text className="bg-primary w-60 p-2 rounded-lg text-center mb-10 text-lg">
           Want to eat
         </Text>
